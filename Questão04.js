@@ -1,17 +1,18 @@
-/*4) Você está em uma sala com três interruptores, cada um conectado a uma lâmpada em uma sala diferente.
-Você não pode ver as lâmpadas da sala em que está, mas pode ligar e desligar os interruptores quantas vezes quiser. 
-Seu objetivo é descobrir qual interruptor controla qual lâmpada.
+const faturamentoEstados = {
+  SP: 67836.43,
+  RJ: 36678.66,
+  MG: 29229.88,
+  ES: 27165.48,
+  Outros: 19849.53
+};
 
-Como você faria para descobrir, usando apenas duas idas até uma das salas das lâmpadas, qual interruptor controla cada lâmpada? */
+const totalFaturamento = Object.values(faturamentoEstados).reduce((total, valor) => total + valor, 0);
+const percentuais = Object.entries(faturamentoEstados).map(([estado, valor]) => ({
+  estado,
+  percentual: ((valor / totalFaturamento) * 100).toFixed(2) + "%"
+}));
 
-/*
-Primeiro passo: ir até os interruptores e acender um deles;
-
-Segundo passo: Desligar o primeiro interruptor e acender o segundo;
-
-Terceiro passo: Ir até a primeira sala e sentir a lâmpada. Se estiver acesa, corresponde ao segundo interruptor.
-Se estiver desligada e quente, corresponde ao primeiro interruptor;
-
-Quarto passo: Sabendo a resposta da primeira sala, partiria para a segunda e deduziria ali mesmo a resposta da segunda lâmpada e terceira.
-Se estiver fria corresponde ao terceiro interruptor. A primeira lâmpada foi possível identificar na primeira sala, o que sobra é a segunda lâmpada.
-*/
+console.log("Percentual de representação por estado:");
+percentuais.forEach(({ estado, percentual }) => {
+  console.log(`${estado}: ${percentual}`);
+});
